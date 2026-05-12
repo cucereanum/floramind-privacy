@@ -3,6 +3,7 @@
 Privacy policy static site for the **FloraMind** mobile app, built with [Astro](https://astro.build) and [Tailwind CSS v4](https://tailwindcss.com). Deployed automatically to GitHub Pages on every push to `main`.
 
 **Live URL:**
+
 ```
 https://cucereanum.github.io/floramind-privacy/privacy-policy/
 ```
@@ -11,12 +12,12 @@ https://cucereanum.github.io/floramind-privacy/privacy-policy/
 
 ## Stack
 
-| Tool | Version | Notes |
-|---|---|---|
-| [Astro](https://astro.build) | 6.x | Static output (`dist/`) |
-| [Tailwind CSS](https://tailwindcss.com) | 4.x | Via `@tailwindcss/vite` |
-| GitHub Actions | — | Auto-deploy on push to `main` |
-| GitHub Pages | — | Served from `dist/` artifact |
+| Tool                                    | Version | Notes                         |
+| --------------------------------------- | ------- | ----------------------------- |
+| [Astro](https://astro.build)            | 6.x     | Static output (`dist/`)       |
+| [Tailwind CSS](https://tailwindcss.com) | 4.x     | Via `@tailwindcss/vite`       |
+| GitHub Actions                          | —       | Auto-deploy on push to `main` |
+| GitHub Pages                            | —       | Served from `dist/` artifact  |
 
 ---
 
@@ -125,9 +126,9 @@ floramind-privacy/
 
 ```js
 export default defineConfig({
-  output: 'static',
-  site:   'https://cucereanum.github.io',  // your GitHub Pages domain
-  base:   '/floramind-privacy',            // must match the repo name
+  output: "static",
+  site: "https://cucereanum.github.io", // your GitHub Pages domain
+  base: "/floramind-privacy", // must match the repo name
 });
 ```
 
@@ -146,4 +147,4 @@ CSS, and the favicon resolve correctly under the `/floramind-privacy` subpath.
 
 ## Contact
 
-Privacy enquiries: [privacy@floramind.app](mailto:privacy@floramind.app)
+Privacy enquiries: [mariuscucereanu99@gmail.com](mailto:mariuscucereanu99@gmail.com)
