@@ -1,0 +1,27 @@
+---
+// Redirect the bare repo root to the privacy-policy page.
+// BASE_URL = "/floramind-privacy/" (set by `base` in astro.config.mjs).
+// Strip any trailing slash, then append the page path.
+const base   = import.meta.env.BASE_URL.replace(/\/$/, '');
+const target = `${base}/privacy-policy/`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- HTTP-equiv refresh for clients with JS disabled -->
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <title>FloraMind — Privacy Policy</title>
+    <!-- JS redirect for speed and SPA-style navigation -->
+    <script define:vars={{ target }}>
+      window.location.replace(target);
+    </script>
+  </head>
+  <body>
+    <p style="font-family:system-ui,sans-serif;padding:2rem;color:#374151">
+      Redirecting to <a href={target} style="color:#059669">{target}</a>…
+    </p>
+  </body>
+</html>

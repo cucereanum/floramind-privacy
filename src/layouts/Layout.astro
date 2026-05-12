@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = 'Privacy Policy for the FloraMind plant care app for iOS and Android.',
+  ogImage,
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageURL   = ogImage ? new URL(ogImage, Astro.site).toString() : undefined;
+// BASE_URL may or may not include a trailing slash depending on Astro version;
+// normalise it so public-file hrefs are always correct.
+const base = (import.meta.env.BASE_URL ?? '/').replace(/\/?$/, '/');
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href={`${base}icon.png`} />
+    <link rel="apple-touch-icon" href={`${base}icon.png`} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Primary meta -->
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content={canonicalURL} />
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name"   content="FloraMind" />
+    {ogImageURL && <meta property="og:image" content={ogImageURL} />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageURL && <meta name="twitter:image" content={ogImageURL} />}
+  </head>
+  <body class="bg-white text-gray-900 antialiased leading-relaxed">
+    <slot />
+  </body>
+</html>
