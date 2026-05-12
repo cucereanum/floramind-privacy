@@ -25,7 +25,7 @@ https://cucereanum.github.io/floramind-privacy/privacy-policy/
 
 ### Prerequisites
 
-- Node.js 20 or later
+- Node.js **22.12** or later (required by Astro 6)
 - npm 10 or later
 
 ### Steps
