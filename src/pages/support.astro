@@ -1,0 +1,221 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const appName      = 'FloraMind';
+const contactEmail = 'cucereanumdev@gmail.com';
+
+const description =
+  `Get help with ${appName} — the plant care app for iOS and Android. ` +
+  `Contact support, browse frequently asked questions, and find answers about reminders, ` +
+  `AI identification, guest data, account deletion, and more.`;
+
+const base    = (import.meta.env.BASE_URL ?? '/').replace(/\/?$/, '/');
+const iconSrc = `${base}icon.png`;
+
+const faqs = [
+  {
+    id:       'add-plant',
+    question: 'How do I add a plant?',
+    answer:   `Tap the <strong>+</strong> button on the home screen or inside any room. You can name your plant, pick a species, set a room, and attach a photo. Once saved, you can configure watering, fertilising, and repotting schedules — FloraMind will remind you automatically.`,
+  },
+  {
+    id:       'reminders',
+    question: 'How do watering reminders work, and why didn\'t I get a notification?',
+    answer:   `Reminders are local on-device notifications — no internet connection needed. When a care task comes due, ${appName} triggers a notification at the scheduled time.<br><br>If you didn\'t receive one, check: <strong>(1)</strong> notification permissions for ${appName} in your device Settings, <strong>(2)</strong> whether you have Quiet Hours configured inside the app (Settings → Notifications → Quiet Hours) that may have silenced it, and <strong>(3)</strong> that Do Not Disturb / Focus mode on your device isn\'t blocking app notifications.`,
+  },
+  {
+    id:       'guest-data',
+    question: 'I used the app as a guest — will my plants be saved if I create an account?',
+    answer:   `Yes. When you create an account (or log in for the first time) on a device that already has guest plants, ${appName} uploads your local plant library to your new account automatically. Nothing is lost. After that, your data syncs across all devices where you sign in.`,
+  },
+  {
+    id:       'ai-identification',
+    question: 'How does AI plant identification and health diagnosis work?',
+    answer:   `Tap the camera icon on any plant card and submit a photo. ${appName} sends the image to our server, which uses <strong>Google Gemini</strong> to analyse it and return an identification result or health assessment in your selected language. The submitted image is permanently discarded once the result is delivered — we do not store your identification photos. There is a daily usage limit for AI requests on the free tier.`,
+  },
+  {
+    id:       'delete-account',
+    question: 'How do I delete my account and data?',
+    answer:   `Go to <strong>Settings → Account → Delete Account</strong> inside the app. Deletion takes immediate effect — your account access is revoked and all server-side data is permanently deleted within 30 days. Uninstalling the app removes all locally stored data from that device. If you need help with deletion, email us at the address above.`,
+  },
+  {
+    id:       'languages',
+    question: 'What languages is FloraMind available in?',
+    answer:   `${appName} is available in <strong>English, German, Romanian, French, Dutch, and Polish</strong>. The app follows your device language automatically; you can also override it in Settings → Language. AI identification results are returned in whichever language you have selected.`,
+  },
+] as const;
+---
+
+<Layout title={`Support — ${appName}`} {description}>
+
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-3 focus:py-1.5 focus:bg-emerald-700 focus:text-white focus:rounded-lg focus:text-sm">
+    Skip to content
+  </a>
+
+  <header id="top" class="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <img src={iconSrc} alt={appName} class="w-8 h-8 rounded-lg shrink-0 object-cover" />
+        <span class="font-semibold text-gray-900 text-sm sm:text-base truncate">
+          {appName} <span class="text-gray-400 font-normal mx-1 hidden sm:inline">—</span>
+          <span class="text-gray-500 font-normal hidden sm:inline">Support</span>
+        </span>
+      </div>
+      <a
+        href="#top"
+        class="shrink-0 text-xs sm:text-sm font-medium text-emerald-700 hover:text-emerald-900 hover:underline underline-offset-2 transition-colors flex items-center gap-1"
+        aria-label="Back to top"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/>
+        </svg>
+        Top
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content" class="max-w-3xl mx-auto px-4 sm:px-6">
+
+    <!-- Hero -->
+    <section class="py-10 sm:py-14 border-b border-gray-100" aria-labelledby="support-title">
+      <div class="flex items-start gap-4">
+        <img
+          src={iconSrc}
+          alt=""
+          width="64"
+          height="64"
+          class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl shadow-lg shadow-emerald-200 shrink-0 mt-1 object-cover"
+        />
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-emerald-600 mb-1">{appName}</p>
+          <h1 id="support-title" class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight leading-tight mb-3">
+            Support
+          </h1>
+        </div>
+      </div>
+      <p class="mt-6 text-gray-600 text-[15px] leading-[1.75] max-w-2xl">
+        Need help with {appName}? Browse the frequently asked questions below, or reach out directly —
+        we usually reply within a couple of business days.
+      </p>
+    </section>
+
+    <div class="space-y-14 py-10 pb-20">
+
+      <!-- Contact -->
+      <section id="contact" aria-labelledby="h-contact">
+        <h2 id="h-contact" class="section-heading">Contact Us</h2>
+        <div class="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 sm:p-8">
+          <p class="body-text mb-6">
+            Send us an email and we&rsquo;ll get back to you as soon as we can — typically within a couple of business days.
+          </p>
+          <address class="not-italic mb-6">
+            <p class="text-lg font-bold text-gray-900 mb-1">{appName} Support</p>
+            <a
+              href={`mailto:${contactEmail}`}
+              class="inline-flex items-center gap-2 text-emerald-700 font-medium hover:text-emerald-900 hover:underline underline-offset-2 text-[15px] transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+              </svg>
+              {contactEmail}
+            </a>
+          </address>
+          <div class="sla-chip">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+            </svg>
+            Usually replied within <strong>a couple of business days</strong>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" aria-labelledby="h-faq">
+        <h2 id="h-faq" class="section-heading">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          {faqs.map(({ id, question, answer }) => (
+            <div class="card" id={id}>
+              <h3 class="text-base font-semibold text-gray-800 mb-2">{question}</h3>
+              <p class="body-text" set:html={answer} />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Privacy link -->
+      <section aria-label="Related pages">
+        <div class="card !border-gray-100 !bg-gray-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <p class="body-text">
+            For information about how {appName} collects and handles your data, see our
+            <a href={`${base}privacy-policy/`} class="link">Privacy Policy</a>.
+          </p>
+          <a
+            href={`${base}privacy-policy/`}
+            class="shrink-0 inline-flex items-center gap-1.5 text-sm font-medium text-emerald-700 hover:text-emerald-900 hover:underline underline-offset-2 transition-colors"
+          >
+            Privacy Policy
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="border-t border-gray-100 bg-gray-50 mt-4">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-2.5">
+          <img src={iconSrc} alt="" width="28" height="28" class="w-7 h-7 rounded-lg shrink-0 object-cover" />
+          <div>
+            <p class="text-sm font-semibold text-gray-700">{appName}</p>
+            <p class="text-xs text-gray-400">&copy; 2026 {appName}. All rights reserved.</p>
+          </div>
+        </div>
+        <div class="flex flex-col sm:items-end gap-1 text-xs text-gray-400">
+          <nav aria-label="Footer navigation" class="flex gap-3">
+            <a href={`${base}privacy-policy/`} class="text-emerald-600 hover:text-emerald-800 hover:underline underline-offset-2 transition-colors">
+              Privacy Policy
+            </a>
+            <a href={`${base}terms/`} class="text-emerald-600 hover:text-emerald-800 hover:underline underline-offset-2 transition-colors">
+              Terms
+            </a>
+          </nav>
+          <a href={`mailto:${contactEmail}`} class="text-emerald-600 hover:text-emerald-800 hover:underline underline-offset-2 transition-colors">
+            {contactEmail}
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</Layout>
+
+<style>
+  @reference "tailwindcss";
+
+  .section-heading {
+    @apply text-xl sm:text-2xl font-bold text-gray-900 mb-5
+           pl-4 border-l-[3px] border-emerald-500 leading-snug;
+  }
+
+  .card {
+    @apply bg-white border border-gray-200 rounded-2xl p-5 shadow-sm;
+  }
+
+  .body-text {
+    @apply text-[15px] text-gray-600 leading-[1.75];
+  }
+
+  .link {
+    @apply text-emerald-700 underline underline-offset-2 hover:text-emerald-900 transition-colors;
+  }
+
+  .sla-chip {
+    @apply inline-flex items-center gap-1.5 text-xs text-gray-600
+           bg-white border border-emerald-200 px-3 py-1.5 rounded-full;
+  }
+</style>

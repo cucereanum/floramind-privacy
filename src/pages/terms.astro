@@ -1,0 +1,578 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const effectiveDate    = 'June 19, 2026';
+const effectiveDateISO = '2026-06-19';
+const appName          = 'FloraMind';
+const appVersion       = '1.0.0';
+const contactEmail     = 'cucereanumdev@gmail.com';
+
+const description =
+  `Terms of Service for the ${appName} plant care app (iOS and Android). ` +
+  `Your rights and responsibilities when using the app, subscriptions, user content, and more.`;
+
+const base    = (import.meta.env.BASE_URL ?? '/').replace(/\/?$/, '/');
+const iconSrc = `${base}icon.png`;
+
+const toc = [
+  ['#acceptance',       '1. Acceptance of Terms'],
+  ['#service',          '2. Description of Service'],
+  ['#accounts',         '3. Accounts'],
+  ['#guest-use',        '4. Guest Use'],
+  ['#user-content',     '5. User Content'],
+  ['#acceptable-use',   '6. Acceptable Use'],
+  ['#subscriptions',    '7. Subscriptions and Payments'],
+  ['#ip',               '8. Intellectual Property'],
+  ['#third-parties',    '9. Third-Party Services'],
+  ['#disclaimers',      '10. Disclaimers'],
+  ['#liability',        '11. Limitation of Liability'],
+  ['#termination',      '12. Termination'],
+  ['#changes',          '13. Changes to These Terms'],
+  ['#governing-law',    '14. Governing Law'],
+  ['#contact',          '15. Contact'],
+] as const;
+---
+
+<Layout title={`Terms of Service — ${appName}`} {description}>
+
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-3 focus:py-1.5 focus:bg-emerald-700 focus:text-white focus:rounded-lg focus:text-sm">
+    Skip to content
+  </a>
+
+  <header id="top" class="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <img src={iconSrc} alt={appName} class="w-8 h-8 rounded-lg shrink-0 object-cover" />
+        <span class="font-semibold text-gray-900 text-sm sm:text-base truncate">
+          {appName} <span class="text-gray-400 font-normal mx-1 hidden sm:inline">—</span>
+          <span class="text-gray-500 font-normal hidden sm:inline">Terms of Service</span>
+        </span>
+      </div>
+      <a
+        href="#top"
+        class="shrink-0 text-xs sm:text-sm font-medium text-emerald-700 hover:text-emerald-900 hover:underline underline-offset-2 transition-colors flex items-center gap-1"
+        aria-label="Back to top"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/>
+        </svg>
+        Top
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content" class="max-w-3xl mx-auto px-4 sm:px-6">
+
+    <section class="py-10 sm:py-14 border-b border-gray-100" aria-labelledby="terms-title">
+      <div class="flex items-start gap-4">
+        <img
+          src={iconSrc}
+          alt=""
+          width="64"
+          height="64"
+          class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl shadow-lg shadow-emerald-200 shrink-0 mt-1 object-cover"
+        />
+        <div>
+          <p class="text-xs font-semibold uppercase tracking-widest text-emerald-600 mb-1">{appName}</p>
+          <h1 id="terms-title" class="text-3xl sm:text-4xl font-bold text-gray-900 tracking-tight leading-tight mb-3">
+            Terms of Service
+          </h1>
+          <p class="text-sm text-gray-500">
+            Effective date:&nbsp;<time datetime={effectiveDateISO} class="font-medium text-gray-700">{effectiveDate}</time>
+            <span class="mx-2 text-gray-300">|</span>
+            App version:&nbsp;<span class="font-medium text-gray-700">{appVersion}</span>
+          </p>
+        </div>
+      </div>
+
+      <p class="mt-6 text-gray-600 text-[15px] leading-[1.75] max-w-2xl">
+        These Terms of Service (&ldquo;Terms&rdquo;) govern your use of the <strong>{appName}</strong> iOS
+        and Android application (the &ldquo;Application&rdquo;). Please read them carefully before using
+        the Application. By downloading, installing, or using the Application, you agree to be bound by
+        these Terms. If you do not agree, do not use the Application.
+      </p>
+    </section>
+
+    <nav class="my-10 p-5 sm:p-6 rounded-2xl bg-gray-50 border border-gray-200" aria-label="Table of contents">
+      <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Contents</p>
+      <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm list-none p-0 m-0">
+        {toc.map(([href, label]) => (
+          <li>
+            <a
+              href={href}
+              class="group flex items-center gap-2 text-gray-600 hover:text-emerald-700 transition-colors py-0.5"
+            >
+              <span class="w-1 h-1 rounded-full bg-emerald-400 group-hover:bg-emerald-600 shrink-0 transition-colors" aria-hidden="true"></span>
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="space-y-14 pb-20">
+
+      <!-- 1. ACCEPTANCE -->
+      <section id="acceptance" aria-labelledby="h-acceptance">
+        <h2 id="h-acceptance" class="section-heading">Acceptance of Terms</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            By accessing or using <strong>{appName}</strong>, you confirm that you are at least 13 years of
+            age (or the applicable minimum age of digital consent in your jurisdiction), that you have the
+            legal capacity to enter into a binding agreement, and that you accept these Terms in full.
+          </p>
+          <p>
+            If you are using the Application on behalf of an organisation, you represent that you have the
+            authority to bind that organisation to these Terms, and the term &ldquo;you&rdquo; refers to
+            that organisation.
+          </p>
+          <p>
+            Use of the Application is also subject to our
+            <a href={`${base}privacy-policy/`} class="link">Privacy Policy</a>, which is incorporated into
+            these Terms by reference.
+          </p>
+        </div>
+      </section>
+
+      <!-- 2. SERVICE -->
+      <section id="service" aria-labelledby="h-service">
+        <h2 id="h-service" class="section-heading">Description of Service</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            {appName} is a plant care application for iOS and Android that allows you to:
+          </p>
+          <ul class="bullet-list">
+            <li>Track houseplants and manage care schedules (watering, fertilising, repotting)</li>
+            <li>Receive local on-device reminders for upcoming care tasks</li>
+            <li>Log care history and maintain a growth photo journal</li>
+            <li>Submit plant photographs for AI-assisted identification and health diagnosis</li>
+            <li>Optionally sync your plant library across devices via a registered account</li>
+          </ul>
+          <p>
+            Core functionality is available offline without registration. Cloud synchronisation and AI
+            identification features require an internet connection and, in the case of synchronisation,
+            a registered account.
+          </p>
+          <p>
+            We reserve the right to modify, suspend, or discontinue any feature or the Application as a whole
+            at any time. Where a change materially affects paid features, we will provide reasonable advance
+            notice to affected users.
+          </p>
+        </div>
+      </section>
+
+      <!-- 3. ACCOUNTS -->
+      <section id="accounts" aria-labelledby="h-accounts">
+        <h2 id="h-accounts" class="section-heading">Accounts</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            To access cloud synchronisation you must register an account using a valid email address and
+            a password. You are responsible for:
+          </p>
+          <ul class="bullet-list">
+            <li>Providing accurate and current registration information</li>
+            <li>Keeping your password confidential and not sharing account credentials</li>
+            <li>All activity that occurs under your account</li>
+            <li>Notifying us promptly at <a href={`mailto:${contactEmail}`} class="link">{contactEmail}</a> if you become aware of any unauthorised use</li>
+          </ul>
+          <p>
+            We reserve the right to suspend or terminate accounts that are found to be in violation of
+            these Terms, to be associated with abusive behaviour, or to pose a security risk to other users
+            or our infrastructure.
+          </p>
+          <p>
+            You may delete your account at any time via <strong>Settings → Account → Delete Account</strong>.
+            Account deletion removes your access immediately and permanently deletes server-side data within
+            30 days as described in our <a href={`${base}privacy-policy/`} class="link">Privacy Policy</a>.
+          </p>
+        </div>
+      </section>
+
+      <!-- 4. GUEST USE -->
+      <section id="guest-use" aria-labelledby="h-guest">
+        <h2 id="h-guest" class="section-heading">Guest Use</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            You may use {appName} without registering an account (&ldquo;Guest Mode&rdquo;). In Guest Mode,
+            all data is stored exclusively on your device using local storage. We have no access to this
+            data, and it is not backed up to our servers.
+          </p>
+          <p>
+            If you uninstall the Application while in Guest Mode, all locally stored data will be permanently
+            lost. We are not liable for data loss resulting from uninstallation, device failure, or factory
+            reset while using Guest Mode.
+          </p>
+          <p>
+            When you create a registered account on a device that already contains guest data, {appName}
+            will upload your local plant library to your new account. This migration is a one-time operation
+            and cannot be undone.
+          </p>
+        </div>
+      </section>
+
+      <!-- 5. USER CONTENT -->
+      <section id="user-content" aria-labelledby="h-content">
+        <h2 id="h-content" class="section-heading">User Content</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            &ldquo;User Content&rdquo; means any data, text, photographs, or other material you submit to
+            the Application, including plant records, notes, care logs, and photographs you upload for
+            identification or as part of your growth journal.
+          </p>
+          <p>
+            You retain full ownership of your User Content. By submitting User Content to the Application
+            you grant {appName} a limited, non-exclusive, royalty-free licence to store, process, and
+            transmit that content solely to the extent necessary to provide the services described in these
+            Terms — specifically, to synchronise your data across your authorised devices and to process
+            identification photographs via our AI pipeline. This licence terminates when you delete the
+            relevant content or your account.
+          </p>
+          <p>
+            You represent and warrant that:
+          </p>
+          <ul class="bullet-list">
+            <li>You own or have the necessary rights to the User Content you submit</li>
+            <li>Your User Content does not infringe any third-party intellectual property, privacy, or other rights</li>
+            <li>Your User Content does not contain material that is unlawful, harmful, or offensive</li>
+          </ul>
+          <p>
+            We do not review User Content before it is stored, and we are not responsible for the accuracy
+            or legality of content you submit. We reserve the right to remove User Content that violates
+            these Terms.
+          </p>
+        </div>
+      </section>
+
+      <!-- 6. ACCEPTABLE USE -->
+      <section id="acceptable-use" aria-labelledby="h-use">
+        <h2 id="h-use" class="section-heading">Acceptable Use</h2>
+        <div class="card body-text space-y-3">
+          <p>You agree not to use the Application to:</p>
+          <ul class="bullet-list">
+            <li>Violate any applicable law or regulation</li>
+            <li>Attempt to gain unauthorised access to our servers, infrastructure, or other users&apos; accounts</li>
+            <li>Reverse-engineer, decompile, or disassemble any part of the Application, except to the extent expressly permitted by applicable law</li>
+            <li>Scrape, harvest, or otherwise extract data from the Application using automated means</li>
+            <li>Use the Application in any manner that could damage, disable, overburden, or impair our servers or networks</li>
+            <li>Submit photographs containing unlawful content for AI identification</li>
+            <li>Circumvent any usage limits or access controls implemented in the Application</li>
+          </ul>
+          <p>
+            Violations of this section may result in immediate suspension or termination of your account
+            and, where required, referral to law-enforcement authorities.
+          </p>
+        </div>
+      </section>
+
+      <!-- 7. SUBSCRIPTIONS -->
+      <section id="subscriptions" aria-labelledby="h-subs">
+        <h2 id="h-subs" class="section-heading">Subscriptions and Payments</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            {appName} may offer optional paid features or subscriptions (&ldquo;Premium&rdquo;) that unlock
+            higher AI identification limits or additional functionality. All purchases are processed
+            exclusively through the <strong>Apple App Store</strong> or <strong>Google Play</strong>.
+            We do not collect or handle payment card information directly.
+          </p>
+          <p>
+            Subscriptions auto-renew unless cancelled at least 24 hours before the end of the current
+            billing period. You can manage and cancel subscriptions at any time via your App Store or
+            Google Play account settings. Cancellation takes effect at the end of the current billing period —
+            you retain access to paid features until that date.
+          </p>
+          <p>
+            All prices are displayed in your local currency as determined by the App Store or Google Play.
+            We reserve the right to change subscription pricing with reasonable advance notice. Price
+            changes will not affect your current billing period.
+          </p>
+          <p>
+            Refunds are subject to Apple&apos;s and Google&apos;s refund policies. We do not process
+            refunds directly. If you believe you are entitled to a refund, please contact Apple Support
+            or Google Play Support.
+          </p>
+        </div>
+      </section>
+
+      <!-- 8. IP -->
+      <section id="ip" aria-labelledby="h-ip">
+        <h2 id="h-ip" class="section-heading">Intellectual Property</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            The Application, including its design, code, graphics, and all content we produce, is owned by
+            {appName} and protected by copyright, trademark, and other intellectual property laws. These
+            Terms do not transfer any intellectual property rights to you.
+          </p>
+          <p>
+            You are granted a limited, non-exclusive, non-transferable, revocable licence to install and
+            use the Application on devices you own or control, solely for your personal, non-commercial
+            purposes and in accordance with these Terms. This licence does not include the right to sublicence,
+            modify, distribute, or create derivative works based on the Application.
+          </p>
+          <p>
+            The {appName} name, logo, and any associated marks are trademarks of {appName}. Nothing in
+            these Terms grants you the right to use any of our trademarks without our prior written consent.
+          </p>
+        </div>
+      </section>
+
+      <!-- 9. THIRD-PARTY SERVICES -->
+      <section id="third-parties" aria-labelledby="h-third">
+        <h2 id="h-third" class="section-heading">Third-Party Services</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            The Application uses the following third-party services:
+          </p>
+          <ul class="bullet-list">
+            <li>
+              <strong>Google Gemini (Google LLC)</strong> — used server-side to process plant identification
+              and health diagnosis requests. Your submitted photographs are transmitted to Google&apos;s
+              infrastructure for this purpose. Google&apos;s use of data is governed by its own terms and
+              privacy policy.
+            </li>
+            <li>
+              <strong>Apple App Store / Google Play</strong> — used for application distribution and
+              in-app purchase processing. These platforms operate under their own terms of service.
+            </li>
+          </ul>
+          <p>
+            We are not responsible for the availability, accuracy, or practices of third-party services.
+            Your use of those services is subject to their respective terms and privacy policies.
+          </p>
+        </div>
+      </section>
+
+      <!-- 10. DISCLAIMERS -->
+      <section id="disclaimers" aria-labelledby="h-disclaimers">
+        <h2 id="h-disclaimers" class="section-heading">Disclaimers</h2>
+        <div class="card body-text space-y-3">
+          <p class="font-medium text-gray-700 uppercase text-xs tracking-wide">
+            To the maximum extent permitted by applicable law:
+          </p>
+          <p>
+            The Application is provided <strong>&ldquo;as is&rdquo;</strong> and
+            <strong>&ldquo;as available&rdquo;</strong> without warranties of any kind, whether express
+            or implied, including but not limited to implied warranties of merchantability, fitness for a
+            particular purpose, and non-infringement.
+          </p>
+          <p>
+            <strong>AI identification and health diagnosis results are informational only.</strong> They are
+            generated by an AI model and may be inaccurate. Do not rely on them as a substitute for advice
+            from a qualified horticulturalist or botanist. {appName} makes no warranty as to the accuracy
+            or completeness of AI-generated results.
+          </p>
+          <p>
+            We do not warrant that the Application will be uninterrupted, error-free, or free from viruses
+            or other harmful components. We do not warrant that any defects will be corrected or that the
+            Application will meet your specific requirements.
+          </p>
+          <p>
+            Nothing in these Terms affects any statutory rights you may have as a consumer under applicable
+            law that cannot be excluded or limited by contract.
+          </p>
+        </div>
+      </section>
+
+      <!-- 11. LIABILITY -->
+      <section id="liability" aria-labelledby="h-liability">
+        <h2 id="h-liability" class="section-heading">Limitation of Liability</h2>
+        <div class="card body-text space-y-3">
+          <p class="font-medium text-gray-700 uppercase text-xs tracking-wide">
+            To the maximum extent permitted by applicable law:
+          </p>
+          <p>
+            {appName} and its developers shall not be liable for any indirect, incidental, special,
+            consequential, or punitive damages, including but not limited to loss of data, loss of profits,
+            loss of plants (or plant health), or loss of goodwill, arising out of or in connection with
+            your use of or inability to use the Application, even if we have been advised of the possibility
+            of such damages.
+          </p>
+          <p>
+            Our total aggregate liability to you for any claims arising under or in connection with these
+            Terms shall not exceed the amount you paid us (if any) in the twelve months preceding the event
+            giving rise to the claim, or <strong>€10</strong>, whichever is greater.
+          </p>
+          <p>
+            Some jurisdictions do not allow the exclusion or limitation of certain warranties or liabilities.
+            In those jurisdictions, our liability is limited to the maximum extent permitted by law.
+          </p>
+        </div>
+      </section>
+
+      <!-- 12. TERMINATION -->
+      <section id="termination" aria-labelledby="h-termination">
+        <h2 id="h-termination" class="section-heading">Termination</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            You may stop using the Application at any time. You may delete your account via
+            <strong>Settings → Account → Delete Account</strong>. Uninstalling the Application removes
+            all locally stored data from that device.
+          </p>
+          <p>
+            We may suspend or terminate your access to the Application at any time, with or without notice,
+            if you violate these Terms, engage in behaviour that poses a risk to other users or our
+            infrastructure, or if we are required to do so by law.
+          </p>
+          <p>
+            Upon termination, your licence to use the Application ceases immediately. Sections covering
+            intellectual property, disclaimers, limitation of liability, and governing law survive
+            termination of these Terms.
+          </p>
+        </div>
+      </section>
+
+      <!-- 13. CHANGES -->
+      <section id="changes" aria-labelledby="h-changes">
+        <h2 id="h-changes" class="section-heading">Changes to These Terms</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            We reserve the right to update these Terms at any time. The effective date at the top of this
+            page will reflect the date the current version took effect. We will always make the current
+            Terms available within the Application and at this URL.
+          </p>
+          <p>
+            For material changes — such as changes to payment terms, limitations of liability, or your
+            legal rights — we will provide at least <strong>14 days&rsquo; advance notice</strong> via an
+            in-app notification and, where you hold a registered account, by email. Your continued use of
+            the Application after the revised Terms take effect constitutes acceptance of those changes.
+          </p>
+          <p>
+            If you do not agree to the revised Terms, you must stop using the Application and, if applicable,
+            delete your account before the revised Terms take effect.
+          </p>
+        </div>
+      </section>
+
+      <!-- 14. GOVERNING LAW -->
+      <section id="governing-law" aria-labelledby="h-law">
+        <h2 id="h-law" class="section-heading">Governing Law</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            These Terms are governed by and construed in accordance with applicable law. If you are a
+            consumer in the European Union, you benefit from any mandatory provisions of the law of your
+            country of residence, and nothing in these Terms affects your rights as a consumer under that law.
+          </p>
+          <p>
+            If you are located in the EU, you may also use the European Commission&apos;s Online Dispute
+            Resolution platform at
+            <a href="https://ec.europa.eu/consumers/odr" class="link" target="_blank" rel="noopener noreferrer">ec.europa.eu/consumers/odr</a>
+            for disputes related to online purchases.
+          </p>
+          <p>
+            We will always attempt to resolve disputes amicably. Before initiating any formal proceedings,
+            please contact us at <a href={`mailto:${contactEmail}`} class="link">{contactEmail}</a> so we
+            can try to address your concern directly.
+          </p>
+        </div>
+      </section>
+
+      <!-- 15. CONTACT -->
+      <section id="contact" aria-labelledby="h-contact">
+        <h2 id="h-contact" class="section-heading">Contact</h2>
+        <div class="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 sm:p-8">
+          <p class="body-text mb-6">
+            Questions about these Terms? Reach out to us at the address below. We will acknowledge
+            receipt within <strong>5 business days</strong>.
+          </p>
+          <address class="not-italic mb-6">
+            <p class="text-lg font-bold text-gray-900 mb-1">{appName}</p>
+            <a
+              href={`mailto:${contactEmail}`}
+              class="inline-flex items-center gap-2 text-emerald-700 font-medium hover:text-emerald-900 hover:underline underline-offset-2 text-[15px] transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+              </svg>
+              {contactEmail}
+            </a>
+          </address>
+          <div class="flex flex-wrap gap-3">
+            <div class="sla-chip">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 text-emerald-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>
+              Acknowledged within <strong>5 business days</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="border-t border-gray-100 bg-gray-50 mt-4">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div class="flex items-center gap-2.5">
+          <img src={iconSrc} alt="" width="28" height="28" class="w-7 h-7 rounded-lg shrink-0 object-cover" />
+          <div>
+            <p class="text-sm font-semibold text-gray-700">{appName}</p>
+            <p class="text-xs text-gray-400">&copy; 2026 {appName}. All rights reserved.</p>
+          </div>
+        </div>
+        <div class="flex flex-col sm:items-end gap-1 text-xs text-gray-400">
+          <p>Effective date: <time datetime={effectiveDateISO}>{effectiveDate}</time></p>
+          <nav aria-label="Footer navigation" class="flex gap-3">
+            <a href={`${base}privacy-policy/`} class="text-emerald-600 hover:text-emerald-800 hover:underline underline-offset-2 transition-colors">
+              Privacy Policy
+            </a>
+            <a href={`${base}support/`} class="text-emerald-600 hover:text-emerald-800 hover:underline underline-offset-2 transition-colors">
+              Support
+            </a>
+          </nav>
+          <a href={`mailto:${contactEmail}`} class="text-emerald-600 hover:text-emerald-800 hover:underline underline-offset-2 transition-colors">
+            {contactEmail}
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</Layout>
+
+<style>
+  @reference "tailwindcss";
+
+  .section-heading {
+    @apply text-xl sm:text-2xl font-bold text-gray-900 mb-5
+           pl-4 border-l-[3px] border-emerald-500 leading-snug;
+  }
+
+  .card {
+    @apply bg-white border border-gray-200 rounded-2xl p-5 shadow-sm;
+  }
+
+  .card-title {
+    @apply font-semibold text-gray-800 text-sm mb-3 flex flex-wrap items-center gap-2;
+  }
+
+  .body-text {
+    @apply text-[15px] text-gray-600 leading-[1.75];
+  }
+
+  .link {
+    @apply text-emerald-700 underline underline-offset-2 hover:text-emerald-900 transition-colors;
+  }
+
+  .badge {
+    @apply text-[11px] font-normal font-sans text-emerald-700
+           bg-emerald-50 border border-emerald-200
+           px-2 py-0.5 rounded-full;
+  }
+
+  .bullet-list {
+    @apply space-y-2 list-none;
+  }
+  .bullet-list li {
+    @apply flex items-start gap-2.5 text-[15px] text-gray-600 leading-[1.75];
+  }
+  .bullet-list li::before {
+    content: '';
+    @apply mt-[0.55em] w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0;
+  }
+
+  .sla-chip {
+    @apply inline-flex items-center gap-1.5 text-xs text-gray-600
+           bg-white border border-emerald-200 px-3 py-1.5 rounded-full;
+  }
+</style>
