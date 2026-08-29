@@ -31,12 +31,17 @@ const faqs = [
   {
     id:       'ai-identification',
     question: 'How does AI plant identification and health diagnosis work?',
-    answer:   `Tap the camera icon on any plant card and submit a photo. ${appName} sends the image to our server, which uses <strong>Google Gemini</strong> to analyse it and return an identification result or health assessment in your selected language. The submitted image is permanently discarded once the result is delivered — we do not store your identification photos. There is a daily usage limit for AI requests on the free tier.`,
+    answer:   `Tap the camera icon on any plant card and submit a photo. ${appName} sends the image to our server, which uses <strong>Google Gemini</strong> to analyse it and return an identification result or health assessment in your selected language. Photos submitted for identification or diagnosis are <strong>not stored by us</strong> — they are held in memory only for the length of the request. Photos you save to a plant, or to a wild-plant discovery, <strong>are</strong> stored — see the next question.<br><br>Identification, diagnosis and discovery scans are each capped per day, per account and per device, and requests may also be refused once our overall daily AI budget is reached.`,
+  },
+  {
+    id:       'photo-privacy',
+    question: 'Who can see the photos I save to a plant or a discovery?',
+    answer:   `Photos you save to a plant, and photos attached to wild-plant discoveries, are uploaded to our image storage and kept until you delete the plant, the discovery, or your account.<br><br><strong>Those photos are stored on a public bucket at predictable web addresses, so anyone who has or guesses the address can open them without signing in.</strong> They are not password-protected. Please avoid photographing anything you would not want seen by someone outside the app — the inside of your home, documents, other people, or anything that shows where you live. Full detail is in our <a href="${base}privacy-policy/" class="link">Privacy Policy</a>.`,
   },
   {
     id:       'delete-account',
     question: 'How do I delete my account and data?',
-    answer:   `Go to <strong>Settings → Account → Delete Account</strong> inside the app. Deletion takes immediate effect — your account access is revoked and all server-side data is permanently deleted within 30 days. Uninstalling the app removes all locally stored data from that device. If you need help with deletion, email us at the address above.`,
+    answer:   `Go to <strong>Settings → Account → Delete Account</strong> inside the app. Deletion is <strong>immediate</strong> — your user record, plants, care schedules and logs, scan and diagnosis history, discoveries (including their stored coordinates), authentication tokens and all stored photos are removed straight away. Uninstalling the app removes locally stored data from that device but does not by itself delete your account. If you need help with deletion, email us at the address above.`,
   },
   {
     id:       'languages',

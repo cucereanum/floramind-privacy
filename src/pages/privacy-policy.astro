@@ -1,60 +1,76 @@
 ---
 import Layout from '../layouts/Layout.astro';
- 
-const effectiveDate    = 'May 12, 2026';
-const effectiveDateISO = '2026-05-12';
+
+const effectiveDate    = 'August 28, 2026';
+const effectiveDateISO = '2026-08-28';
 const appName          = 'FloraMind';
 const appVersion       = '1.0.0';
 const contactEmail     = 'cucereanumdev@gmail.com';
- 
+
 const description =
   `Privacy Policy for the ${appName} plant care app (iOS and Android). ` +
-  `What we collect, how we use it, where it is stored, and your rights.`;
- 
+  `What we collect, where your photos are stored, who we share data with, and your rights.`;
+
 const base = (import.meta.env.BASE_URL ?? '/').replace(/\/?$/, '/');
 const iconSrc = `${base}icon.png`;
- 
+
 const toc = [
   ['#introduction',           '1. Introduction'],
   ['#data-controller',        '2. Data Controller'],
   ['#information-we-collect', '3. Information We Collect'],
-  ['#legal-basis',            '4. Legal Basis for Processing'],
-  ['#how-we-use',             '5. How We Use Your Information'],
-  ['#storage-security',       '6. Data Storage and Security'],
-  ['#international-transfers','7. International Data Transfers'],
-  ['#sharing',                '8. Data Sharing and Third Parties'],
-  ['#your-rights',            '9. Your Rights'],
-  ['#children',               "10. Children's Privacy"],
-  ['#changes',                '11. Changes to This Policy'],
-  ['#contact',                '12. Contact Us'],
+  ['#photos',                 '4. Your Photos — Where Each One Goes'],
+  ['#location',               '5. Location Data'],
+  ['#ai-processing',          '6. AI Processing'],
+  ['#legal-basis',            '7. Legal Basis for Processing'],
+  ['#how-we-use',             '8. How We Use Your Information'],
+  ['#storage-security',       '9. Storage, Security and Retention'],
+  ['#international-transfers','10. International Data Transfers'],
+  ['#sharing',                '11. Data Sharing and Third Parties'],
+  ['#your-rights',            '12. Your Rights'],
+  ['#california',             '13. California Privacy Rights'],
+  ['#children',               "14. Children's Privacy"],
+  ['#changes',                '15. Changes to This Policy'],
+  ['#contact',                '16. Contact Us'],
 ] as const;
- 
+
 const notCollected = [
-  'GPS location or geolocation data',
-  'Device advertising identifiers used for cross-app tracking',
+  'Device advertising identifiers, or any identifier used for cross-app tracking',
   'Contacts or address book',
-  'Microphone or camera access beyond photos you explicitly submit',
+  'Microphone access',
+  'Camera or photo library access beyond the photos you explicitly submit',
+  'Continuous or background location — coordinates are read only at the moment you take an identification or discovery photo, and only if you granted permission',
   'Browsing history or behavioural analytics',
-  'Payment or financial information — handled exclusively by Apple App Store and Google Play',
+  'Payment or financial information — app distribution is handled by the Apple App Store and Google Play, and we never receive payment card data',
   'Crash reports, session recordings, or usage telemetry — no third-party analytics or crash-reporting services are integrated',
 ] as const;
- 
+
 const rightsCards = [
-  { right: 'Access',      desc: 'Request a copy of all personal data we hold about you in a structured, intelligible format.' },
+  { right: 'Access',        desc: 'Request a copy of all personal data we hold about you in a structured, intelligible format.' },
   { right: 'Rectification', desc: 'Request correction of inaccurate or incomplete personal data without undue delay.' },
-  { right: 'Erasure',    desc: 'Request deletion of your account and all associated server-side data. We process such requests within 30 days of verification.' },
-  { right: 'Portability', desc: 'Receive your plant library data in a structured, commonly used, machine-readable format, where technically feasible.' },
-  { right: 'Restriction', desc: 'Request that we restrict further processing of your data while a dispute or objection is under review.' },
-  { right: 'Objection',   desc: 'Object at any time to processing of your personal data where we rely on legitimate interests as our legal basis.' },
+  { right: 'Erasure',       desc: 'Delete your account in the app at any time. Removal of your server-side data is immediate, not queued.' },
+  { right: 'Portability',   desc: 'Receive your plant library, discoveries and scan history in a structured, commonly used, machine-readable format.' },
+  { right: 'Restriction',   desc: 'Request that we restrict further processing of your data while a dispute or objection is under review.' },
+  { right: 'Objection',     desc: 'Object at any time to processing we base on legitimate interests, and withdraw consent for location processing at any time.' },
+] as const;
+
+const retention = [
+  ['Account record (email, display name, password hash)',     'Until you delete your account — then removed immediately'],
+  ['Plant library, care schedules and care logs',             'Until you delete the plant or your account — then removed immediately'],
+  ['Saved plant photos and discovery photos (Cloudflare R2)', 'Stored indefinitely until the plant, the discovery or your account is deleted'],
+  ['Discovery coordinates and place name',                    'Stored indefinitely until the discovery or your account is deleted'],
+  ['Scan and diagnosis history (text results)',               'Until you delete the plant or your account'],
+  ['Identification and diagnosis photos',                     'Never written to our storage — held in memory only for the duration of the request'],
+  ['IP address in the rate-limiting table',                   'Automatically purged within 24 hours'],
+  ['Feedback you send us (with your email address and name)', 'Held in our support mailbox for as long as needed to answer you'],
 ] as const;
 ---
- 
+
 <Layout title={`Privacy Policy — ${appName}`} {description}>
- 
+
   <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-3 focus:py-1.5 focus:bg-emerald-700 focus:text-white focus:rounded-lg focus:text-sm">
     Skip to content
   </a>
- 
+
   <header id="top" class="sticky top-0 z-20 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
       <div class="flex items-center gap-2.5 min-w-0">
@@ -76,9 +92,9 @@ const rightsCards = [
       </a>
     </div>
   </header>
- 
+
   <main id="main-content" class="max-w-3xl mx-auto px-4 sm:px-6">
- 
+
     <section class="py-10 sm:py-14 border-b border-gray-100" aria-labelledby="policy-title">
       <div class="flex items-start gap-4">
         <img
@@ -100,7 +116,7 @@ const rightsCards = [
           </p>
         </div>
       </div>
- 
+
       <p class="mt-6 text-gray-600 text-[15px] leading-[1.75] max-w-2xl">
         This Privacy Policy governs the collection, use, storage, and disclosure of personal information by
         <strong>{appName}</strong> in connection with its iOS and Android mobile application
@@ -108,8 +124,14 @@ const rightsCards = [
         assume as data controller. We do not serve advertising within the Application, operate third-party
         analytics pipelines, or integrate crash-reporting services.
       </p>
+
+      <p class="mt-4 text-gray-600 text-[15px] leading-[1.75] max-w-2xl">
+        Photographs are handled in four different ways depending on what you use them for, and only some of
+        them are stored by us. <a href="#photos" class="link">Section&nbsp;4</a> sets out exactly which photo
+        goes where, including the fact that stored photos are served from a public web address.
+      </p>
     </section>
- 
+
     <nav class="my-10 p-5 sm:p-6 rounded-2xl bg-gray-50 border border-gray-200" aria-label="Table of contents">
       <p class="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Contents</p>
       <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm list-none p-0 m-0">
@@ -126,9 +148,9 @@ const rightsCards = [
         ))}
       </ul>
     </nav>
- 
+
     <div class="space-y-14 pb-20">
- 
+
       <!-- 1. INTRODUCTION -->
       <section id="introduction" aria-labelledby="h-intro">
         <h2 id="h-intro" class="section-heading">Introduction</h2>
@@ -136,8 +158,9 @@ const rightsCards = [
           <p>
             <strong>{appName}</strong> (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;) develops and operates
             the <strong>{appName}</strong> mobile application for <strong>iOS and Android</strong>. The Application
-            enables users to track houseplants, manage care schedules, review care history, and optionally submit
-            photographs for cloud-assisted plant identification.
+            enables users to track houseplants, manage care schedules, review care history, submit photographs
+            for AI-assisted plant identification and health diagnosis, and record wild plants they encounter
+            as &ldquo;discoveries&rdquo;.
           </p>
           <p>
             This Privacy Policy applies to all users of the Application regardless of geographic location and
@@ -149,7 +172,7 @@ const rightsCards = [
           <p>
             If you do not accept the terms of this Policy, you must discontinue use of the Application and, if
             you hold a registered account, exercise your right to deletion as described in
-            <a href="#your-rights" class="link">Section 9 (Your Rights)</a>.
+            <a href="#your-rights" class="link">Section 12 (Your Rights)</a>.
           </p>
           <p>
             <strong>{appName} does not sell personal information and does not disclose it to third parties
@@ -157,7 +180,7 @@ const rightsCards = [
           </p>
         </div>
       </section>
- 
+
       <!-- 2. DATA CONTROLLER -->
       <section id="data-controller" aria-labelledby="h-controller">
         <h2 id="h-controller" class="section-heading">Data Controller</h2>
@@ -179,39 +202,40 @@ const rightsCards = [
           </p>
         </div>
       </section>
- 
+
       <!-- 3. INFORMATION WE COLLECT -->
       <section id="information-we-collect" aria-labelledby="h-collect">
         <h2 id="h-collect" class="section-heading">Information We Collect</h2>
- 
+
         <div class="space-y-4">
- 
+
           <div class="card">
             <h3 class="card-title">
               Account Data
               <span class="badge">Optional — registration only</span>
             </h3>
             <p class="body-text mb-3">
-              Core functionality of the Application is available without registration and operates entirely
-              offline. Users who elect to create an account for the purpose of cross-device synchronisation
-              provide the following information:
+              Plant identification works without an account, including during onboarding. Users who create an
+              account for cross-device synchronisation provide the following:
             </p>
             <ul class="bullet-list">
-              <li><strong>Email address</strong> — used as your primary account identifier and login credential.</li>
-              <li><strong>Password</strong> — transmitted over an encrypted connection and stored exclusively as a one-way cryptographic hash using an industry-standard algorithm. We are technically unable to retrieve or reconstruct your original password.</li>
-              <li><strong>Display name</strong> — a user-selected name displayed within the Application. This field is optional at registration.</li>
+              <li><strong>Email address</strong> — your primary account identifier and login credential.</li>
+              <li><strong>Password</strong> — transmitted over an encrypted connection and stored exclusively as a one-way BCrypt hash. We are technically unable to retrieve or reconstruct your original password.</li>
+              <li><strong>Display name</strong> — a user-selected name displayed within the Application.</li>
+              <li><strong>Sign in with Google or Apple</strong> — if you use one of these instead of a password, we receive your <strong>email address, name, and a provider user ID</strong> from that provider and store them on your account record.</li>
             </ul>
             <p class="footnote mt-3">
-              Account data is transmitted to our own backend infrastructure over HTTPS. It is not disclosed to,
-              sold to, or shared with any advertising or data-brokerage services.
+              We do not currently send email to users. There is no email-verification step and no
+              password-reset email, so please do not treat email verification as a security control on your
+              account. See <a href="#storage-security" class="link">Section&nbsp;9</a>.
             </p>
           </div>
- 
+
           <div class="card">
             <h3 class="card-title">Plant Library Data</h3>
             <p class="body-text mb-3">
-              The Application collects and stores the following content that you voluntarily enter into your plant
-              collection:
+              Content you enter into your plant collection, which is stored on our servers once you have an
+              account:
             </p>
             <ul class="bullet-list">
               <li><strong>Plant name and species</strong></li>
@@ -219,39 +243,46 @@ const rightsCards = [
               <li><strong>Notes</strong></li>
               <li><strong>Care schedules</strong> — including watering, fertilising, and repotting intervals</li>
               <li><strong>Care history</strong> — a log of completed care actions</li>
-              <li><strong>Photographs</strong> you voluntarily attach to a plant record</li>
+              <li><strong>Scan and diagnosis history</strong> — the AI-generated species and care information, and past health assessments, kept per plant</li>
+              <li><strong>Photographs</strong> — see <a href="#photos" class="link">Section&nbsp;4</a>, which sets out where each kind of photo is stored</li>
             </ul>
-            <p class="footnote mt-3">
-              Plant library data is stored locally on your device. Where you have created an account,
-              this data is synchronised to our servers solely to support multi-device access on your behalf.
-              No synchronisation occurs without an account.
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Discoveries</h3>
+            <p class="body-text">
+              When you record a wild plant as a discovery, we store the AI-generated result, the photograph,
+              and — if you granted location permission — the <strong>exact latitude and longitude</strong> of
+              the discovery together with an optional place name. Coordinates attached to a discovery are
+              retained indefinitely, until you delete the discovery or your account.
             </p>
           </div>
- 
+
           <div class="card">
             <h3 class="card-title">
-              Plant Identification Data
-              <span class="badge">Optional — AI identification only</span>
+              IP Address
+              <span class="badge">Guests and signed-in users alike</span>
             </h3>
-            <ul class="bullet-list">
-              <li>
-                When you voluntarily submit a photograph for plant identification, that image is transmitted
-                to our servers and processed using <strong>Google Gemini</strong>, a third-party AI service
-                operated by Google LLC. The processing occurs server-side, not exclusively on-device.
-              </li>
-              <li>
-                We transmit your <strong>language preference setting</strong> alongside the image so that
-                identification results are returned in your selected language. No additional device identifiers
-                or personal data are included in this request.
-              </li>
-              <li>
-                <strong>Submitted images are not retained.</strong> Each identification image is permanently
-                discarded upon completion of the associated request. We do not build or maintain an image
-                dataset from user submissions.
-              </li>
-            </ul>
+            <p class="body-text">
+              Every request that consumes AI capacity is rate-limited. To do that we record the requesting
+              <strong>IP address in a rate-limiting table</strong>. IPv6 addresses are truncated to their
+              <code>/64</code> prefix before storage. These records are
+              <strong>automatically purged within 24 hours</strong> and are not used to profile you, build a
+              usage history, or serve advertising. This applies whether or not you are signed in.
+            </p>
           </div>
- 
+
+          <div class="card">
+            <h3 class="card-title">Feedback You Send Us</h3>
+            <p class="body-text">
+              If you submit feedback from within the Application, the message is delivered to our own inbox
+              by <strong>Resend</strong>, an email delivery provider acting as our processor. The message body
+              includes <strong>your email address and display name</strong> alongside your feedback text, so
+              that we can reply. Resend is used for this one purpose only; we do not send you marketing,
+              notification, verification, or password-reset email.
+            </p>
+          </div>
+
           <div class="card !border-emerald-200 !bg-emerald-50/50">
             <h3 class="card-title !text-emerald-800">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-600 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -280,7 +311,7 @@ const rightsCards = [
               </li>
             </ul>
           </div>
- 
+
           <div class="card">
             <h3 class="card-title">Information We Do Not Collect</h3>
             <p class="body-text mb-3">
@@ -295,11 +326,173 @@ const rightsCards = [
               ))}
             </ul>
           </div>
- 
+
         </div>
       </section>
- 
-      <!-- 4. LEGAL BASIS -->
+
+      <!-- 4. PHOTOS -->
+      <section id="photos" aria-labelledby="h-photos">
+        <h2 id="h-photos" class="section-heading">Your Photos — Where Each One Goes</h2>
+
+        <p class="body-text mb-5">
+          The Application uses photographs in four different ways, and they are <strong>not</strong> handled
+          the same way. Please read this section rather than assuming.
+        </p>
+
+        <div class="alert mb-5">
+          <p class="alert-title">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/>
+            </svg>
+            Stored photos are served from a public address
+          </p>
+          <p>
+            Saved plant photos and discovery photos are kept in a <strong>public-read storage bucket</strong>,
+            and each file&apos;s web address is derived from the plant or discovery identifier. In practice this
+            means: <strong>anyone who has the address of one of these photos — or who guesses it — can open it
+            without signing in.</strong> These photos are <em>not</em> access-controlled, and we ask you not to
+            treat them as private. Please do not photograph anything you would not want viewed by someone
+            outside the Application, including the interior of your home, documents, other people, or anything
+            that identifies where you live.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+
+          <div class="card">
+            <h3 class="card-title">
+              1. Plant identification
+              <span class="badge">Not stored by us</span>
+            </h3>
+            <p class="body-text">
+              When you photograph a plant to identify it — including during guest onboarding, before you have
+              an account — the image is re-encoded in memory and sent to <strong>Google Gemini</strong> for
+              analysis. It is <strong>not written to our storage and not retained by us</strong>. The AI&apos;s
+              text output (species, care information) is saved only if you have already saved that plant to
+              your library.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">
+              2. Photos you save to a plant
+              <span class="badge-warn">Stored indefinitely · public URL</span>
+            </h3>
+            <p class="body-text">
+              When you attach a photo to a plant in your library, that image <strong>is uploaded to our image
+              storage</strong> (Cloudflare R2) and kept there until you delete the plant or your account. It is
+              stored at a predictable address of the form
+              <code>&#123;environment&#125;/plants/&#123;plantId&#125;.jpg</code> in a public-read bucket, and is
+              therefore reachable by anyone who has or guesses that address.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">
+              3. Wild plant discoveries
+              <span class="badge-warn">Stored indefinitely · public URL</span>
+            </h3>
+            <p class="body-text">
+              A discovery photo is <strong>both</strong> sent to Google Gemini for analysis <strong>and</strong>
+              stored in the same public-read bucket, at
+              <code>&#123;environment&#125;/discoveries/&#123;discoveryId&#125;.jpg</code>. The same public-address
+              caveat applies. If you granted location permission, the discovery record also holds the exact
+              coordinates where the photo was taken — see <a href="#location" class="link">Section&nbsp;5</a>.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">
+              4. Health diagnosis
+              <span class="badge">Photo not stored · history is</span>
+            </h3>
+            <p class="body-text">
+              When you ask for a health assessment of one of your plants, the photo is sent to Google Gemini
+              and is <strong>not stored by us</strong>. To produce a better assessment, we also send Gemini
+              <strong>that plant&apos;s previous scan and diagnosis history</strong> as context. That history is
+              text we already hold in your plant library.
+            </p>
+          </div>
+
+          <div class="card !border-emerald-200 !bg-emerald-50/50">
+            <h3 class="card-title !text-emerald-800">Metadata is stripped</h3>
+            <p class="body-text">
+              Every image you submit is re-encoded to JPEG before it is stored or transmitted. This
+              <strong>removes EXIF metadata, including any GPS coordinates your camera embedded in the
+              file</strong>. Location reaches us only through the separate, permission-gated path described in
+              <a href="#location" class="link">Section&nbsp;5</a> — never silently through a photo.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. LOCATION -->
+      <section id="location" aria-labelledby="h-location">
+        <h2 id="h-location" class="section-heading">Location Data</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            Location is <strong>optional</strong>. If you grant the Application location permission, it sends
+            your <strong>latitude and longitude</strong> with plant identification and discovery requests. If
+            you decline, or later revoke the permission in your device settings, those features continue to
+            work without it.
+          </p>
+          <p>Two separate things happen with those coordinates:</p>
+          <ul class="bullet-list">
+            <li>
+              <strong>They are sent to Open-Meteo</strong> (<code>api.open-meteo.com</code>), a third-party
+              weather service, to look up local temperature, humidity and precipitation so that care advice
+              matches your actual conditions. Your <strong>exact coordinates leave our systems</strong> when
+              this lookup happens. Open-Meteo is a separate recipient of that data and handles it under its
+              own terms.
+            </li>
+            <li>
+              <strong>For discoveries only, they are stored.</strong> The exact latitude, longitude and an
+              optional place name are written to our database as part of the discovery record and kept
+              <strong>indefinitely</strong>, until you delete the discovery or your account.
+            </li>
+          </ul>
+          <p>
+            We process location on the basis of your <strong>consent</strong> (GDPR Art. 6(1)(a)), given
+            through your device&apos;s location permission prompt. You may withdraw that consent at any time by
+            revoking the permission in your device settings. Withdrawal does not affect processing carried out
+            before you withdrew, and existing discovery records keep their stored coordinates until you delete
+            them.
+          </p>
+        </div>
+      </section>
+
+      <!-- 6. AI PROCESSING -->
+      <section id="ai-processing" aria-labelledby="h-ai">
+        <h2 id="h-ai" class="section-heading">AI Processing</h2>
+        <div class="space-y-4">
+          <div class="card body-text space-y-3">
+            <p>
+              Plant identification, health diagnosis and wild-plant discovery are performed by
+              <strong>Google Gemini</strong>, operated by Google LLC. We send Gemini the photograph, your
+              language preference, local weather data where available, and — for a diagnosis — the previous
+              scan and diagnosis history for that plant.
+            </p>
+            <p>
+              Under the terms on which we use Gemini, <strong>Google does not use the data we submit to train
+              or improve its models</strong>. Google may retain submitted data transiently for abuse
+              monitoring. Processing may take place on servers in the United States or in other countries
+              outside the EEA and the UK.
+            </p>
+          </div>
+
+          <div class="card body-text">
+            <p>
+              We do not use your personal data for automated decision-making producing legal or similarly
+              significant effects. AI results are informational only — see our
+              <a href={`${base}terms/`} class="link">Terms of Service</a>, which contain an important safety
+              disclaimer about wild-plant edibility and toxicity information.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. LEGAL BASIS -->
       <section id="legal-basis" aria-labelledby="h-legal">
         <h2 id="h-legal" class="section-heading">Legal Basis for Processing</h2>
         <div class="card body-text space-y-3">
@@ -321,20 +514,24 @@ const rightsCards = [
                   <td class="px-4 py-3 text-gray-500">Art. 6(1)(b) — Performance of a contract</td>
                 </tr>
                 <tr class="bg-white hover:bg-gray-50 transition-colors">
-                  <td class="px-4 py-3 text-gray-700">Synchronisation of plant library data</td>
+                  <td class="px-4 py-3 text-gray-700">Storing and synchronising your plant library, photos and discoveries</td>
                   <td class="px-4 py-3 text-gray-500">Art. 6(1)(b) — Performance of a contract</td>
                 </tr>
                 <tr class="bg-white hover:bg-gray-50 transition-colors">
-                  <td class="px-4 py-3 text-gray-700">Plant identification (image submission)</td>
-                  <td class="px-4 py-3 text-gray-500">Art. 6(1)(b) — Performance of a contract / Art. 6(1)(a) — Consent (where required by local law)</td>
+                  <td class="px-4 py-3 text-gray-700">Identification, diagnosis and discovery (photograph sent to Google Gemini)</td>
+                  <td class="px-4 py-3 text-gray-500">Art. 6(1)(b) — Performance of a contract</td>
                 </tr>
                 <tr class="bg-white hover:bg-gray-50 transition-colors">
-                  <td class="px-4 py-3 text-gray-700">Security monitoring and abuse prevention</td>
-                  <td class="px-4 py-3 text-gray-500">Art. 6(1)(f) — Legitimate interests</td>
+                  <td class="px-4 py-3 text-gray-700">Location: weather lookup via Open-Meteo, and storage of discovery coordinates</td>
+                  <td class="px-4 py-3 text-gray-500"><strong class="text-gray-700">Art. 6(1)(a) — Consent</strong>, given through the device location permission and withdrawable at any time</td>
                 </tr>
                 <tr class="bg-white hover:bg-gray-50 transition-colors">
-                  <td class="px-4 py-3 text-gray-700">Responding to support or privacy enquiries</td>
-                  <td class="px-4 py-3 text-gray-500">Art. 6(1)(f) — Legitimate interests</td>
+                  <td class="px-4 py-3 text-gray-700">IP-based rate limiting and abuse prevention</td>
+                  <td class="px-4 py-3 text-gray-500">Art. 6(1)(f) — Legitimate interests: preventing abuse of a paid AI service and keeping it available to genuine users</td>
+                </tr>
+                <tr class="bg-white hover:bg-gray-50 transition-colors">
+                  <td class="px-4 py-3 text-gray-700">Handling feedback and support enquiries</td>
+                  <td class="px-4 py-3 text-gray-500">Art. 6(1)(f) — Legitimate interests: answering the person who contacted us</td>
                 </tr>
                 <tr class="bg-white hover:bg-gray-50 transition-colors">
                   <td class="px-4 py-3 text-gray-700">Compliance with legal obligations</td>
@@ -351,8 +548,8 @@ const rightsCards = [
           </p>
         </div>
       </section>
- 
-      <!-- 5. HOW WE USE -->
+
+      <!-- 8. HOW WE USE -->
       <section id="how-we-use" aria-labelledby="h-use">
         <h2 id="h-use" class="section-heading">How We Use Your Information</h2>
         <div class="card">
@@ -362,26 +559,30 @@ const rightsCards = [
           </p>
           <ul class="bullet-list">
             <li>
-              <strong>Application operation</strong> — authenticating registered users, synchronising plant
-              library data across authorised devices, and delivering plant identification results.
+              <strong>Application operation</strong> — authenticating registered users, storing and
+              synchronising your plant library, photos and discoveries across your devices, and delivering
+              AI results.
             </li>
             <li>
               <strong>Local notifications</strong> — scheduling on-device care reminders based solely on
               the schedules you configure. This processing occurs entirely on your device.
             </li>
             <li>
-              <strong>AI identification processing</strong> — transmitting identification images and language
-              preference to Google Gemini on your behalf, receiving the result, and returning it to you.
-              Images are discarded immediately upon response delivery.
+              <strong>AI processing</strong> — transmitting photographs, language preference, local weather
+              data and, for diagnoses, the plant&apos;s prior history to Google Gemini on your behalf, and
+              returning the result to you.
             </li>
             <li>
-              <strong>User support</strong> — using information you provide in support communications solely
-              to investigate and respond to your enquiry. Support communications are retained only as long
-              as necessary to resolve the matter.
+              <strong>Care advice from local conditions</strong> — where you consented to location, looking up
+              current weather for your coordinates via Open-Meteo.
             </li>
             <li>
-              <strong>Security and integrity</strong> — detecting, investigating, and preventing abuse of
-              our APIs and unauthorised access to accounts.
+              <strong>User support</strong> — using the email address, display name and message sent with
+              in-app feedback solely to investigate and answer your enquiry.
+            </li>
+            <li>
+              <strong>Security and integrity</strong> — rate-limiting requests by IP address, device and
+              account to detect and prevent abuse of our APIs and of the AI capacity we pay for.
             </li>
             <li>
               <strong>Legal compliance</strong> — processing data where required to fulfil a legal or
@@ -394,106 +595,150 @@ const rightsCards = [
           </p>
         </div>
       </section>
- 
-      <!-- 6. STORAGE & SECURITY -->
+
+      <!-- 9. STORAGE, SECURITY & RETENTION -->
       <section id="storage-security" aria-labelledby="h-storage">
-        <h2 id="h-storage" class="section-heading">Data Storage and Security</h2>
+        <h2 id="h-storage" class="section-heading">Storage, Security and Retention</h2>
         <div class="space-y-4">
- 
+
           <div class="card">
-            <h3 class="card-title">On-Device Storage</h3>
-            <p class="body-text">
-              Plant records, associated content, and user preferences are stored locally on your device.
-              Preference data is held in encrypted local storage. Session authentication tokens are stored
-              exclusively within the operating system&apos;s secure credential store (iOS Keychain or Android
-              Keystore) and are accessible only by the Application process. No other application on your device
-              can access this data.
-            </p>
-          </div>
- 
-          <div class="card">
-            <h3 class="card-title">Server-Side Storage</h3>
+            <h3 class="card-title">Where Your Data Lives</h3>
             <div class="body-text space-y-2">
               <p>
-                Where you have registered an account, credentials (email address and password hash) and
-                synchronised plant library data are stored on infrastructure that we operate and control.
-                All data in transit is protected using TLS encryption (HTTPS). Data at rest is encrypted
-                at the storage layer using industry-standard encryption.
+                Our application server and its Postgres database are hosted on <strong>Railway</strong>.
+                Photographs that we store are held in <strong>Cloudflare R2</strong> object storage. Both are
+                third-party infrastructure providers acting as our processors, and both are named in
+                <a href="#sharing" class="link">Section&nbsp;11</a>.
               </p>
               <p>
-                We do not rely on third-party &ldquo;backend-as-a-service&rdquo; platforms as our primary
-                data store for account or plant library data. Server infrastructure is maintained with
-                access controls that restrict data access to authorised personnel only.
+                All communication between the Application and our servers uses TLS-encrypted connections
+                (HTTPS). Encryption at rest for the database and for object storage is provided by those
+                infrastructure providers.
               </p>
             </div>
           </div>
- 
+
           <div class="card">
-            <h3 class="card-title">Security Measures</h3>
+            <h3 class="card-title">On-Device Storage</h3>
+            <p class="body-text">
+              User preferences are held in encrypted local storage on your device. Session authentication
+              tokens are stored exclusively within the operating system&apos;s secure credential store (iOS
+              Keychain or Android Keystore) and are accessible only by the Application process.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">Security Measures — and Their Limits</h3>
             <ul class="bullet-list mb-3">
-              <li>All communication between the Application and our servers uses TLS-encrypted connections (HTTPS).</li>
-              <li>Passwords are protected using a one-way cryptographic hashing algorithm; plaintext passwords are never stored or accessible to us.</li>
+              <li>Passwords are stored only as BCrypt hashes; plaintext passwords are never stored or accessible to us.</li>
               <li>Access to systems that hold personal data is restricted to authorised personnel on a need-to-know basis.</li>
-              <li>Plant identification images are permanently discarded upon completion of each identification request and are not stored in any log or backup.</li>
+              <li>Identification and diagnosis images are held in memory for the duration of the request and are never written to our storage or backups.</li>
+              <li>Uploaded images are re-encoded, which strips EXIF metadata including embedded GPS coordinates.</li>
+              <li>
+                <strong>Stored plant and discovery photos are not access-controlled.</strong> They sit in a
+                public-read bucket at predictable addresses, as described in
+                <a href="#photos" class="link">Section&nbsp;4</a>. We disclose this rather than describe those
+                photos as private.
+              </li>
+              <li>
+                <strong>There is no email verification and no password reset by email.</strong> We do not send
+                email to users at all, so account recovery and identity confirmation by email are not
+                available and should not be relied on.
+              </li>
             </ul>
             <p class="body-text">
               No method of electronic transmission or storage is entirely secure. While we implement
               commercially reasonable safeguards, we cannot guarantee absolute security. To report a potential
-              security vulnerability, please contact us at:
+              security vulnerability, please contact us at
               <a href={`mailto:${contactEmail}`} class="link">{contactEmail}</a>.
             </p>
           </div>
- 
+
           <div class="card">
-            <h3 class="card-title">Data Retention</h3>
-            <p class="body-text">
-              We retain account credentials and synchronised plant library data for the duration of your
-              account. Upon deletion of your account — whether initiated by you via the Application or
-              through a written request to us — we permanently delete all associated personal data from
-              our servers within <strong>30 days</strong> of the deletion request, except where applicable
-              law requires us to retain certain records for a longer period, in which case access to such
-              records will be restricted pending their lawful deletion. Uninstalling the Application removes
-              all locally stored data from that device.
+            <h3 class="card-title">Retention</h3>
+            <div class="overflow-x-auto -mx-1">
+              <table class="w-full text-[14px] min-w-[480px] border-separate border-spacing-0">
+                <thead>
+                  <tr class="bg-gray-50">
+                    <th scope="col" class="text-left px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500 border-b border-gray-200 rounded-tl-lg">Data</th>
+                    <th scope="col" class="text-left px-4 py-3 text-xs font-semibold uppercase tracking-wide text-gray-500 border-b border-gray-200 rounded-tr-lg">Retained for</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                  {retention.map(([what, howLong]) => (
+                    <tr class="bg-white hover:bg-gray-50 transition-colors">
+                      <td class="px-4 py-3 text-gray-700">{what}</td>
+                      <td class="px-4 py-3 text-gray-500">{howLong}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card !border-emerald-200 !bg-emerald-50/50">
+            <h3 class="card-title !text-emerald-800">Account Deletion Is Immediate</h3>
+            <p class="body-text mb-3">
+              When you delete your account, deletion happens <strong>straight away — not on a queue and not
+              on a 30-day timer</strong>. We remove:
+            </p>
+            <ul class="bullet-list">
+              <li>your user record;</li>
+              <li>all plants, care schedules and care logs;</li>
+              <li>all scan and diagnosis history;</li>
+              <li>all discoveries, including their stored coordinates;</li>
+              <li>all authentication tokens; and</li>
+              <li>all associated photographs in our image storage.</li>
+            </ul>
+            <p class="footnote mt-3">
+              Rate-limiting records tied to your requests are not deleted individually; they expire on their
+              own within 24 hours. Uninstalling the Application removes locally stored data from that device
+              but does not by itself delete your account.
             </p>
           </div>
- 
+
         </div>
       </section>
- 
-      <!-- 7. INTERNATIONAL TRANSFERS -->
+
+      <!-- 10. INTERNATIONAL TRANSFERS -->
       <section id="international-transfers" aria-labelledby="h-transfers">
         <h2 id="h-transfers" class="section-heading">International Data Transfers</h2>
         <div class="card body-text space-y-3">
           <p>
-            When you submit a photograph for plant identification, that image is processed by <strong>Google
-            Gemini</strong>, a service operated by Google LLC, which may process data on servers located
-            in the United States or other jurisdictions outside the European Economic Area (&ldquo;EEA&rdquo;)
-            or the United Kingdom.
+            Photographs and related context sent for AI processing are handled by <strong>Google
+            Gemini</strong> (Google LLC), which may process data on servers located in the United States or
+            other jurisdictions outside the European Economic Area (&ldquo;EEA&rdquo;) or the United Kingdom.
+            Where you consented to location processing, your coordinates are sent to
+            <strong>Open-Meteo</strong>; in-app feedback containing your email address and name is transmitted
+            through <strong>Resend</strong>; and our hosting and image storage providers,
+            <strong>Railway</strong> and <strong>Cloudflare</strong>, may also process data outside the EEA
+            and the UK.
           </p>
           <p>
-            Where such transfers occur, we ensure that appropriate safeguards are in place as required by
-            applicable data-protection law. In respect of transfers to the United States, Google LLC participates
-            in and is certified under the EU–US Data Privacy Framework and the UK Extension thereto.
-            You may review Google&apos;s data-processing terms and transfer mechanisms at
+            Where such transfers occur, we rely on the transfer mechanisms offered by each provider, including
+            Standard Contractual Clauses where applicable. In respect of transfers to the United States,
+            Google LLC participates in and is certified under the EU–US Data Privacy Framework and the UK
+            Extension thereto. You may review Google&apos;s data-processing terms and transfer mechanisms at
             <a href="https://policies.google.com/privacy" class="link" target="_blank" rel="noopener noreferrer">policies.google.com/privacy</a>.
           </p>
           <p>
-            Our own server infrastructure is located in the United States. If this changes in a way that affects data-subject rights, we will update
-            this section and notify registered users in advance.
+            Separately, note that photographs stored in our public-read bucket are reachable from anywhere in
+            the world by anyone holding the address, as described in
+            <a href="#photos" class="link">Section&nbsp;4</a>.
           </p>
         </div>
       </section>
- 
-      <!-- 8. SHARING -->
+
+      <!-- 11. SHARING -->
       <section id="sharing" aria-labelledby="h-sharing">
         <h2 id="h-sharing" class="section-heading">Data Sharing and Third Parties</h2>
         <p class="body-text mb-5">
-          We disclose personal data only to the extent strictly necessary to operate the Application or
-          as required by applicable law. We do not rent, sell, or trade your personal data.
+          We disclose personal data only to the extent necessary to operate the Application or as required by
+          applicable law. We do not rent, sell, or trade your personal data.
         </p>
- 
+
         <div class="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm mb-4">
-          <table class="w-full text-[14px] min-w-[520px]">
+          <table class="w-full text-[14px] min-w-[560px]">
             <caption class="sr-only">Third-party services, their role, and categories of data involved</caption>
             <thead>
               <tr class="bg-gray-50 border-b border-gray-200">
@@ -505,23 +750,43 @@ const rightsCards = [
             <tbody class="divide-y divide-gray-100">
               <tr class="bg-white hover:bg-gray-50 transition-colors">
                 <td class="px-4 py-3.5 font-semibold text-gray-800">Google Gemini (Google LLC)</td>
-                <td class="px-4 py-3.5 text-gray-600">Server-side plant identification processing</td>
-                <td class="px-4 py-3.5 text-gray-500">Identification image and language preference setting. Image is discarded by us upon response; Google&apos;s handling is governed by its own data-processing terms.</td>
+                <td class="px-4 py-3.5 text-gray-600">Plant identification, health diagnosis, wild-plant discovery</td>
+                <td class="px-4 py-3.5 text-gray-500">The submitted photograph, your language preference, local weather data where available, and — for diagnoses — that plant&apos;s prior scan and diagnosis history. See <a href="#ai-processing" class="link">Section&nbsp;6</a>.</td>
               </tr>
               <tr class="bg-white hover:bg-gray-50 transition-colors">
-                <td class="px-4 py-3.5 font-semibold text-gray-800">Apple App Store (Apple Inc.)</td>
-                <td class="px-4 py-3.5 text-gray-600">Application distribution and in-app purchase processing</td>
-                <td class="px-4 py-3.5 text-gray-500">Governed entirely by Apple&apos;s Privacy Policy. We do not receive payment card data.</td>
+                <td class="px-4 py-3.5 font-semibold text-gray-800">Open-Meteo</td>
+                <td class="px-4 py-3.5 text-gray-600">Local weather lookup used to improve care advice</td>
+                <td class="px-4 py-3.5 text-gray-500">Your <strong>exact latitude and longitude</strong>, where you granted location permission. No account identifier is sent.</td>
               </tr>
               <tr class="bg-white hover:bg-gray-50 transition-colors">
-                <td class="px-4 py-3.5 font-semibold text-gray-800">Google Play (Google LLC)</td>
-                <td class="px-4 py-3.5 text-gray-600">Application distribution and Play billing</td>
-                <td class="px-4 py-3.5 text-gray-500">Governed entirely by Google&apos;s Privacy Policy. We do not receive payment card data.</td>
+                <td class="px-4 py-3.5 font-semibold text-gray-800">Cloudflare R2 (Cloudflare, Inc.)</td>
+                <td class="px-4 py-3.5 text-gray-600">Object storage for photographs</td>
+                <td class="px-4 py-3.5 text-gray-500">Saved plant photos and discovery photos. The bucket is public-read; see <a href="#photos" class="link">Section&nbsp;4</a>.</td>
+              </tr>
+              <tr class="bg-white hover:bg-gray-50 transition-colors">
+                <td class="px-4 py-3.5 font-semibold text-gray-800">Railway</td>
+                <td class="px-4 py-3.5 text-gray-600">Application hosting and Postgres database</td>
+                <td class="px-4 py-3.5 text-gray-500">All server-side data described in this Policy, other than photographs.</td>
+              </tr>
+              <tr class="bg-white hover:bg-gray-50 transition-colors">
+                <td class="px-4 py-3.5 font-semibold text-gray-800">Resend</td>
+                <td class="px-4 py-3.5 text-gray-600">Delivering in-app feedback to our own inbox</td>
+                <td class="px-4 py-3.5 text-gray-500">Your feedback text together with your email address and display name. No email is sent to users.</td>
+              </tr>
+              <tr class="bg-white hover:bg-gray-50 transition-colors">
+                <td class="px-4 py-3.5 font-semibold text-gray-800">Apple (Apple Inc.)</td>
+                <td class="px-4 py-3.5 text-gray-600">Application distribution; Sign in with Apple</td>
+                <td class="px-4 py-3.5 text-gray-500">If you use Sign in with Apple, we receive your email address, name and a provider user ID. Distribution is governed by Apple&apos;s Privacy Policy.</td>
+              </tr>
+              <tr class="bg-white hover:bg-gray-50 transition-colors">
+                <td class="px-4 py-3.5 font-semibold text-gray-800">Google Play / Google Sign-In (Google LLC)</td>
+                <td class="px-4 py-3.5 text-gray-600">Application distribution; Sign in with Google</td>
+                <td class="px-4 py-3.5 text-gray-500">If you use Sign in with Google, we receive your email address, name and a provider user ID. Distribution is governed by Google&apos;s Privacy Policy.</td>
               </tr>
             </tbody>
           </table>
         </div>
- 
+
         <div class="card body-text space-y-3">
           <p>
             <strong>Legal and regulatory disclosure.</strong> We may disclose personal data to competent
@@ -532,16 +797,15 @@ const rightsCards = [
           <p>
             <strong>Business transfers.</strong> In the event of a merger, acquisition, reorganisation,
             or sale of all or substantially all of our assets, personal data held by us may be transferred
-            to the successor entity. We will provide registered users with at least <strong>30 days&rsquo;
-            advance notice</strong> — via in-app notification and the email address associated with their
-            account — before any such transfer takes effect and before their data becomes subject to a
-            materially different privacy policy. If you do not accept the new policy, you may exercise your
-            right to delete your account prior to the transfer.
+            to the successor entity. We will publish at least <strong>30 days&rsquo; advance notice</strong>
+            on this page and in the Application before any such transfer takes effect and before your data
+            becomes subject to a materially different privacy policy. If you do not accept the new policy,
+            you may delete your account before the transfer.
           </p>
         </div>
       </section>
- 
-      <!-- 9. YOUR RIGHTS -->
+
+      <!-- 12. YOUR RIGHTS -->
       <section id="your-rights" aria-labelledby="h-rights">
         <h2 id="h-rights" class="section-heading">Your Rights</h2>
         <p class="body-text mb-5">
@@ -551,7 +815,7 @@ const rightsCards = [
           &ldquo;Data Subject Request&rdquo;. We will respond within <strong>30 days</strong>; if we
           need longer we will inform you of the reason and the expected completion date.
         </p>
- 
+
         <div class="grid sm:grid-cols-2 gap-3 mb-4">
           {rightsCards.map(({ right, desc }) => (
             <div class="rounded-xl border border-gray-200 bg-white p-4 shadow-sm hover:shadow-md hover:border-emerald-200 transition-all">
@@ -563,13 +827,18 @@ const rightsCards = [
             </div>
           ))}
         </div>
- 
+
         <div class="card body-text space-y-3">
           <p>
             <strong>In-app account deletion.</strong> You may delete your account at any time via
-            <em>Settings &rarr; Account &rarr; Delete Account</em>. Deletion takes immediate effect;
-            access is revoked and server-side data deletion is queued as described in
-            <a href="#storage-security" class="link">Section 6</a>.
+            <em>Settings &rarr; Account &rarr; Delete Account</em>. Removal of your server-side data is
+            immediate and is described in detail in
+            <a href="#storage-security" class="link">Section&nbsp;9</a>.
+          </p>
+          <p>
+            <strong>Withdrawing consent for location.</strong> Revoke the Application&apos;s location permission
+            in your device settings. To remove coordinates already stored with past discoveries, delete those
+            discoveries or your account.
           </p>
           <p>
             <strong>Right to lodge a complaint.</strong> If you are located in the EEA or United Kingdom
@@ -585,8 +854,39 @@ const rightsCards = [
           </p>
         </div>
       </section>
- 
-      <!-- 10. CHILDREN -->
+
+      <!-- 13. CALIFORNIA -->
+      <section id="california" aria-labelledby="h-california">
+        <h2 id="h-california" class="section-heading">California Privacy Rights</h2>
+        <div class="card body-text space-y-3">
+          <p>
+            If you are a California resident, the California Consumer Privacy Act as amended by the CPRA
+            gives you the rights below. The categories of personal information we collect, the purposes for
+            which we use them, and the parties to whom we disclose them are set out in
+            <a href="#information-we-collect" class="link">Sections&nbsp;3 to 6</a> and
+            <a href="#sharing" class="link">Section&nbsp;11</a>. In CCPA terms, the categories we collect are
+            identifiers (email address, display name, provider user ID, IP address), internet or network
+            activity limited to rate-limiting records, geolocation data where you consented, and visual
+            information (your photographs).
+          </p>
+          <ul class="bullet-list">
+            <li><strong>Right to know</strong> the categories and specific pieces of personal information we have collected, their sources, the purposes, and the categories of third parties to whom we disclosed them.</li>
+            <li><strong>Right to delete</strong> personal information we hold about you.</li>
+            <li><strong>Right to correct</strong> inaccurate personal information.</li>
+            <li><strong>Right to limit</strong> the use of sensitive personal information. We use precise geolocation only for the weather lookup and discovery records described in <a href="#location" class="link">Section&nbsp;5</a>, and for no other purpose.</li>
+            <li><strong>Right to non-discrimination</strong> for exercising any of these rights.</li>
+          </ul>
+          <p>
+            <strong>We do not sell or share personal information</strong> as those terms are defined by the
+            CCPA/CPRA, and we have not done so in the preceding twelve months. We do not use or disclose
+            personal information for cross-context behavioural advertising. To exercise a California right,
+            email <a href={`mailto:${contactEmail}`} class="link">{contactEmail}</a>; you may use an
+            authorised agent, and we will verify your request against the account details we hold.
+          </p>
+        </div>
+      </section>
+
+      <!-- 14. CHILDREN -->
       <section id="children" aria-labelledby="h-children">
         <h2 id="h-children" class="section-heading">Children&apos;s Privacy</h2>
         <div class="card body-text space-y-3">
@@ -612,6 +912,12 @@ const rightsCards = [
             </li>
           </ul>
           <p>
+            <strong>How this is enforced.</strong> Users confirm that they meet the minimum age when they
+            accept our <a href={`${base}terms/`} class="link">Terms of Service</a>. We do not carry out any
+            further age verification and do not knowingly collect data from anyone below the applicable age.
+            We act on reports that we receive.
+          </p>
+          <p>
             If you are a parent or legal guardian and believe that a child under the applicable age has
             provided us with personal information without your consent, please contact us at
             <a href={`mailto:${contactEmail}`} class="link">{contactEmail}</a>. Upon verification, we
@@ -619,8 +925,8 @@ const rightsCards = [
           </p>
         </div>
       </section>
- 
-      <!-- 11. CHANGES -->
+
+      <!-- 15. CHANGES -->
       <section id="changes" aria-labelledby="h-changes">
         <h2 id="h-changes" class="section-heading">Changes to This Policy</h2>
         <div class="card body-text space-y-3">
@@ -634,9 +940,8 @@ const rightsCards = [
             For amendments that materially affect the way we collect, use, or share your personal data
             — including any change to the legal basis for processing or to data-sharing arrangements —
             we will provide at least <strong>14 days&rsquo; advance notice</strong> through an in-app
-            notification and, where you have a registered account, by email to the address on file. This
-            notice period provides you with sufficient time to review the changes or to exercise your
-            right to delete your account before they take effect.
+            notification and on this page. <strong>We do not send email to users</strong>, so please do not
+            expect notice by email; this page is the authoritative record.
           </p>
           <p>
             Your continued use of the Application after the revised Policy takes effect constitutes
@@ -646,8 +951,8 @@ const rightsCards = [
           </p>
         </div>
       </section>
- 
-      <!-- 12. CONTACT -->
+
+      <!-- 16. CONTACT -->
       <section id="contact" aria-labelledby="h-contact">
         <h2 id="h-contact" class="section-heading">Contact Us</h2>
         <div class="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-6 sm:p-8">
@@ -685,10 +990,10 @@ const rightsCards = [
           </div>
         </div>
       </section>
- 
+
     </div>
   </main>
- 
+
   <footer class="border-t border-gray-100 bg-gray-50 mt-4">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 py-8">
       <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -716,43 +1021,49 @@ const rightsCards = [
       </div>
     </div>
   </footer>
- 
+
 </Layout>
- 
+
 <style>
   @reference "tailwindcss";
- 
+
   .section-heading {
     @apply text-xl sm:text-2xl font-bold text-gray-900 mb-5
            pl-4 border-l-[3px] border-emerald-500 leading-snug;
   }
- 
+
   .card {
     @apply bg-white border border-gray-200 rounded-2xl p-5 shadow-sm;
   }
- 
+
   .card-title {
     @apply font-semibold text-gray-800 text-sm mb-3 flex flex-wrap items-center gap-2;
   }
- 
+
   .body-text {
     @apply text-[15px] text-gray-600 leading-[1.75];
   }
- 
+
   .footnote {
     @apply text-xs text-gray-400 leading-relaxed;
   }
- 
+
   .link {
     @apply text-emerald-700 underline underline-offset-2 hover:text-emerald-900 transition-colors;
   }
- 
+
   .badge {
     @apply text-[11px] font-normal font-sans text-emerald-700
            bg-emerald-50 border border-emerald-200
            px-2 py-0.5 rounded-full;
   }
- 
+
+  .badge-warn {
+    @apply text-[11px] font-normal font-sans text-amber-800
+           bg-amber-50 border border-amber-300
+           px-2 py-0.5 rounded-full;
+  }
+
   .bullet-list {
     @apply space-y-2 list-none;
   }
@@ -763,13 +1074,32 @@ const rightsCards = [
     content: '';
     @apply mt-[0.55em] w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0;
   }
- 
+
   code {
     @apply font-mono text-[13px] bg-gray-100 border border-gray-200 px-1 py-0.5 rounded;
   }
- 
+
   .sla-chip {
     @apply inline-flex items-center gap-1.5 text-xs text-gray-600
            bg-white border border-emerald-200 px-3 py-1.5 rounded-full;
+  }
+
+  .alert {
+    @apply rounded-2xl border-2 border-amber-300 bg-amber-50 p-5 text-[15px] text-amber-950 leading-[1.75];
+  }
+  .alert-title {
+    @apply flex items-center gap-2 font-bold text-amber-900 text-sm mb-2;
+  }
+
+  .notice {
+    @apply rounded-2xl border border-amber-200 bg-amber-50/60 p-5 text-[15px] text-amber-950 leading-[1.75];
+  }
+  .notice-title {
+    @apply font-bold text-amber-900 text-sm mb-2;
+  }
+
+  .alert .link,
+  .notice .link {
+    @apply text-amber-900 underline underline-offset-2 hover:text-amber-950;
   }
 </style>
